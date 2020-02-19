@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import {
     Link
 } from 'react-router-dom';
+import productApi from '../../Components/ProductsDetailPage/productApi'
+import { Redirect } from 'react-router-dom';
 
 
     function Search(props) {
@@ -49,6 +51,15 @@ import {
     const handleSearch=()=>{       
         props.searchProduct(searchInput,searchData);
     }
+    const viewProduct=(productId)=>{
+        console.log("productId", productId.productId);
+        productApi(productId)
+         return <Redirect to = {
+             `/product/${productId.productId}`
+         }
+         />;
+
+    }
     
 
     
@@ -65,26 +76,34 @@ import {
   </div>
 </div>
 
-
-<Grid style={{display:'flex'}}>
-  <h2>Search Products</h2>
+<h2>Search Products</h2>
+<Grid style={{display:'flex'}}>  
   {
       console.log("prod", finalResult)
   }
-  <Grid item xs={12} sm={6} md={6} lg={3} xl={3} style={{width:'100%',display:'flex'}}>
+  < Grid style = {
+      {
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap'
+      }
+  } >
   {
      finalResult &&  finalResult.map(product => {
        
         // ******************************
-        
-      return <Grid>
-      
-      < Link to = '/product/14177' >< img src = "https://ccstore-z93a.oracleoutsourcing.com/ccstore/v1/images/?source=/file/v2689575973753967220/products/BontragerSolsticeMIPS_21810_J_Primary.jpg&amp;height=300&amp;width=300" / ></Link >
-      
+        let pId = product.productId;
+        let pIdDirect = '/product/'+pId
+      return <Grid  item xs={12} sm={6} md={6} lg={3} xl={3} style={{width:'100%',flexFlow: 'wrap'}}>
+      <div style={{textAlign: 'center'}}>
+      < Link to = {pIdDirect} onClick={viewProduct.bind(this,product)}>< img src = "https://ccstore-z93a.oracleoutsourcing.com/ccstore/v1/images/?source=/file/v2689575973753967220/products/BontragerSolsticeMIPS_21810_J_Primary.jpg&amp;height=300&amp;width=300" / ></Link >
       <p>{
                  product.productId
                  
              }</p>
+             < p > {product.sfdcName }</p>
+             < Link to = {pIdDirect} onClick={viewProduct.bind(this,product)}>View More</Link >
+             </div>
              
 
           
