@@ -19,7 +19,7 @@ import {
    const searchApi = (search) => {
        console.log("searchApi", search)
        const searchTerm = search.payload.searchTerm;
-       const searchData = search.payload.searchData;
+    //    const searchData = search.payload.searchData;
        console.log();
        const options = {
            headers: {
@@ -28,23 +28,34 @@ import {
                'Bepsy-PricelistId': 'defaultPriceGroup',
                'content-type': 'application/json'
            },
+           
        };
+       const data= {
+           "term": 'bike',
+           "sortBy": "new asc",
+           "page": 0,
+           "recordsPerPage": 20,
+           "heirarchical": [],
+           "multiselect": [],
+           "singleselect": [],
+           "range": []
+       }
 
 
        if (searchTerm !== null && searchTerm !== '') {
            let searchGetURL = `http://dev-bepsy-api.objectedge.com/oe_commerce_api/solr/v1/search?`;
-           if (searchTerm.includes('term')) {
-               const newTerm = decodeURI(searchTerm);
-               searchGetURL = `${searchGetURL}query=${encodeURI(newTerm)}`;
-           } else {
-               const searchQuery = {
-                   term: searchTerm,
-               };
-               searchGetURL = `${searchGetURL}query=${encodeURI(
-        JSON.stringify(searchQuery)
-      )}`;
-           }
-           return Axios.get(searchGetURL, options).then(res => console.log(res));
+    //        if (searchTerm.includes('term')) {
+    //            const newTerm = decodeURI(searchTerm);
+    //            searchGetURL = `${searchGetURL}query=${encodeURI(newTerm)}`;
+    //        } else {
+    //            const searchQuery = {
+    //                term: searchTerm,
+    //            };
+    //            searchGetURL = `${searchGetURL}query=${encodeURI(
+    //     JSON.stringify(searchQuery)
+    //   )}`;
+    //        }
+           return Axios.post(searchGetURL, data, options);
        }
    }
 
@@ -52,6 +63,7 @@ function* handleImagesLoad(prop) {
     try {
         const images = yield call(searchApi, prop);
         console.log("images saga", images);
+         yield put(searchSuccess(images));
        // yield put(searchSuccess(images))
 
 

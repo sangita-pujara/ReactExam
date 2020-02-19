@@ -9,6 +9,7 @@ import {
     connect
 } from 'react-redux'
 import Axios from 'axios'
+import Grid from '@material-ui/core/Grid';
 // import searchApi from '../../redux/searchProduct/searchApi'
 
 
@@ -17,7 +18,8 @@ import Axios from 'axios'
 
 
     function Search(props) {
-        // const [response,setResponse]=useState("")
+        const [response, setResponse] = useState("");
+        let finalResult='';
         const searchApi = (searchTerm, searchData) => {
             const options = {
                 headers: {
@@ -42,16 +44,21 @@ import Axios from 'axios'
         JSON.stringify(searchQuery)
       )}`;
                 }
-                return Axios.get(searchGetURL, options).then(response => {
+                const response= Axios.get(searchGetURL, options).then(response => {
                     console.log("response", response)
                     return response
                 }).catch(error=>{return error});
+                return response;
                 
             }
         }
        
 
         console.log("props****", props);
+        if (props.searchResult && props.searchResult.searchResult && props.searchResult.searchResult.searchResponse && props.searchResult.searchResult.searchResponse.data && props.searchResult.searchResult.searchResponse.data.response && props.searchResult.searchResult.searchResponse.data.response.records){
+            finalResult = props.searchResult && props.searchResult.searchResult && props.searchResult.searchResult.searchResponse && props.searchResult.searchResult.searchResponse.data && props.searchResult.searchResult.searchResponse.data.response && props.searchResult.searchResult.searchResponse.data.response.records;
+        }
+        console.log("props****", props.searchResult && props.searchResult.searchResult && props.searchResult.searchResult.searchResponse && props.searchResult.searchResult.searchResponse.data && props.searchResult.searchResult.searchResponse.data.response && props.searchResult.searchResult.searchResponse.data.response.records);
     const [searchInput,setSearchInput]=useState('');
     const [searchData, setSearchData] = useState({
         "term": searchInput,
@@ -75,10 +82,10 @@ import Axios from 'axios'
     }
     const handleSearch=()=>{
         console.log("Call Sagasearch",)
-       const searchResponse= searchApi(searchInput, searchData);
-       console.log("response....", searchResponse)
+      // const searchResponse= searchApi(searchInput, searchData);
+      // console.log("response....", searchResponse)
        //console.log("searchResponse", searchResponse);
-      //  props.searchProduct(searchInput,searchData);
+        props.searchProduct(searchInput,searchData);
     }
     
 
@@ -101,6 +108,22 @@ import Axios from 'axios'
 
 <div >
   <h2>Search Products</h2>
+  {
+      console.log("prod", finalResult)
+  }
+  {
+     finalResult &&  finalResult.map(product => {
+        //   return <ul > 
+        //   <li>{product.productId}</li></ul>
+      return<Grid item sm={12} md={12} lg={4} xl={4}>
+             {
+                 product.productId
+             }
+
+             </Grid>
+        
+      })
+  }
   
 </div>
                 
@@ -122,7 +145,7 @@ const mapDispatchToProps = dispatch => {
 
 
 //export default connect(mapDispatchToProps, mapStateToProps)(Search)
-export default connect(null, mapDispatchToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
 
 
 

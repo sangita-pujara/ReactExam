@@ -26,11 +26,20 @@ export function searchProduct(searchInput,searchData) {
 }
 
 export const searchSuccess = (searchResponse) => {
+    console.log("searchResponse action", searchResponse)
     return {
     type: SEARCH_SUCCESS,
-    payload: searchResponse
+    payload: {searchResponse}
     }
 }
+// export function setResponse(response) {
+//     return {
+//         type: SET_RESPONSE,
+//         payload: {
+//             response,
+//         },
+//     };
+// }
 export const searchFail = (error) => {
     return {
         type: SEARCH_FAIL,

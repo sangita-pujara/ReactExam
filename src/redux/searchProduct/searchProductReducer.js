@@ -27,7 +27,9 @@ const searchProductReducer=(state=initialState,action)=>{
                 payload: action.payload
             }
             case SEARCH_SUCCESS:
+             console.log("action suce", state, action);
                 return {
+                    ...state,
                     loading: false,
                     searchResult: action.payload,
                     error: ''
