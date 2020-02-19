@@ -24,7 +24,7 @@ const ProductsDetailPage = () => {
  
 
      if (!token) {
-       return <Redirect to = '/' / > ;
+       return <Redirect to = '/login' / > ;
      }
     return ( 
      
