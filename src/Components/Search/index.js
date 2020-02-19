@@ -106,7 +106,7 @@ import Grid from '@material-ui/core/Grid';
   </div>
 </div>
 
-<div >
+<Grid style={{display:'flex'}}>
   <h2>Search Products</h2>
   {
       console.log("prod", finalResult)
@@ -115,17 +115,55 @@ import Grid from '@material-ui/core/Grid';
      finalResult &&  finalResult.map(product => {
         //   return <ul > 
         //   <li>{product.productId}</li></ul>
-      return<Grid item sm={12} md={12} lg={4} xl={4}>
-             {
-                 product.productId
-             }
-
-             </Grid>
+        // ******************************
         
+      return <Grid item sm = {
+          12
+      }
+      md = {
+          12
+      }
+      lg = {
+          4
+      }
+      xl = {
+          4
+      } style={{display:'flex'}}>
+      {/* <img src="https://i.imgur.com/2QXWHNu.gif"></img> */}
+      <p>{
+                 product.productId
+                 
+             }</p>
+             
+
+          
+           
+        </Grid>
+        // ***************************************
+
+// return    <Grid item xs={12} sm={6} md={6} lg={4} xl={4} style={{width:'100%'}}>
+//         <div className='custom-card'>
+//           <div className='card-image'>
+//           a
+//           </div>
+//           <div className='card-item-name'>
+//           b
+//           </div>
+//           <div className='skuColor'>d</div>
+//           <div className='card-item-price'>
+//             <div>
+//            c
+//             </div>
+//           </div>
+          
+                   
+//         </div>
+//       </Grid>
       })
+      
   }
   
-</div>
+</Grid>
                 
             </div>
         )

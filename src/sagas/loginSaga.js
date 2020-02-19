@@ -25,7 +25,10 @@ function* handleLogin(prop) {
     console.log("saga =>>>>", prop.payload.login)
     try {
         const login = yield call(LoginApi, prop.payload.login, prop.payload.password);
-        console.log("login saga", login);
+
+        // localStorage.setItem('access_token', response.data.access_token);
+        console.log("login saga", login.data.access_token);
+         localStorage.setItem('access_token', login.data.access_token);
         
         yield put(loginSuccess(login))
 
