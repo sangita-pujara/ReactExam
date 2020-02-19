@@ -10,6 +10,9 @@ import {
 } from 'react-redux'
 import Axios from 'axios'
 import Grid from '@material-ui/core/Grid';
+import {
+    Link
+} from 'react-router-dom';
 // import searchApi from '../../redux/searchProduct/searchApi'
 
 
@@ -106,30 +109,23 @@ import Grid from '@material-ui/core/Grid';
   </div>
 </div>
 
+
 <Grid style={{display:'flex'}}>
   <h2>Search Products</h2>
   {
       console.log("prod", finalResult)
   }
+  <Grid item xs={12} sm={6} md={6} lg={3} xl={3} style={{width:'100%',display:'flex'}}>
   {
      finalResult &&  finalResult.map(product => {
         //   return <ul > 
         //   <li>{product.productId}</li></ul>
         // ******************************
         
-      return <Grid item sm = {
-          12
-      }
-      md = {
-          12
-      }
-      lg = {
-          4
-      }
-      xl = {
-          4
-      } style={{display:'flex'}}>
+      return <Grid>
       {/* <img src="https://i.imgur.com/2QXWHNu.gif"></img> */}
+      < Link to = '/product/14177' > < a > < img src = "https://ccstore-z93a.oracleoutsourcing.com/ccstore/v1/images/?source=/file/v2689575973753967220/products/BontragerSolsticeMIPS_21810_J_Primary.jpg&amp;height=300&amp;width=300" / > </a></Link >
+      
       <p>{
                  product.productId
                  
@@ -164,7 +160,7 @@ import Grid from '@material-ui/core/Grid';
   }
   
 </Grid>
-                
+               </Grid>  
             </div>
         )
 }
