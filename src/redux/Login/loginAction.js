@@ -5,29 +5,6 @@ import {
     LOGIN_FAILURE
 } from './loginConstants'
 
-// export const fetchUsers = () => {
-//   return (dispatch) => {
-//     dispatch(fetchUsersRequest())
-//     axios
-//       .get('https://jsonplaceholder.typicode.com/users')
-//       .then(response => {
-//         // response.data is the users
-//         const users = response.data
-//         dispatch(fetchUsersSuccess(users))
-//       })
-//       .catch(error => {
-//         // error.message is the error message
-//         dispatch(fetchUsersFailure(error.message))
-//       })
-//   }
-// }
-
-// export const fetchUsers = () => {
-//   return {
-//     type: 
-//   }
-// }
-
 
 export function loginRequest(login, password) {
     console.log("action", login, password)
